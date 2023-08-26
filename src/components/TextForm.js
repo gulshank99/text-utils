@@ -1,32 +1,53 @@
 import React, {useState} from 'react'
-
  
 export default function TextForm(props) {
 
-    const[text,setText]=useState('Enter text here');
-   // setText("new text");
-   const handleUpClick=  ()=>{
-   // console.log("UpperCase was clicked" + text);
+    const[text,setText]=useState('Enter here'); 
+
+    const handleUpClick=  ()=>{ 
     let newText = text.toUpperCase();
     setText(newText);
    }
 
-   const handleOnChange=  (event)=>{
-    console.log("OnChange was clicked");
+   const handleLoClick=  ()=>{ 
+    let newText = text.toLowerCase();
+    setText(newText);
+   } 
+
+   const handleClaerClick=  ()=>{ 
+    setText("");
+   } 
+   
+   const handleOnChange=  (event)=>{ 
     setText(event.target.value);
    }
-
-    
-    
+  
   return ( 
     <>  
 
-  <div className="form-group">
+  <div className="container">
     <h1>{props.heading}</h1> 
-    <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+    <textarea className="form-control mb-3" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+    <button className="btn btn-primary m-1" onClick={handleUpClick}>Convert to UpperCase</button> 
+    <button className="btn btn-primary m-1" onClick={handleLoClick}>Convert to LowerCase</button> 
+    <button className="btn btn-primary m-1" onClick={handleClaerClick}>Clear</button> 
+    
+
+
+
   </div>
-  <button className="btn btn-primary" onClick={handleUpClick}>Convert to UpperCase</button>
- 
+
+  <div className="container my-3">
+    <h2>Your Text Data</h2>
+    <p>{text.split(" ").length} words   {text.length} characters   sentences {text.split(".").length-1}</p>
+    <p>Takes {0.008* text.split(" ").length} Minutes to read this</p>
+
+
+    <h2>Preview</h2>
+    <p>{text}</p>
+  </div>
+
+   
     </>
   )
 }
